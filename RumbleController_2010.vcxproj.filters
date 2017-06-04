@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns:atg="http://atg.xbox.com" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{8e114980-c1a3-4ada-ad7c-83caadf5daeb}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="DXUT">
+      <UniqueIdentifier>{a43c5c25-0e86-4a20-b64a-883785ff74fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HID">
+      <UniqueIdentifier>{53763227-da01-4355-9059-ea7baaa71c16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WII">
+      <UniqueIdentifier>{3eeecea6-65f0-41f9-86ea-76f3b1fdbebc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DXUT\Optional\directx.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RumbleController.cpp" />
+    <ClCompile Include="HID.cpp">
+      <Filter>HID</Filter>
+    </ClCompile>
+    <ClCompile Include="HIDWII.cpp">
+      <Filter>HID</Filter>
+    </ClCompile>
+    <ClCompile Include="HIDXBOX.cpp">
+      <Filter>HID</Filter>
+    </ClCompile>
+    <ClCompile Include="UsbHID.cpp">
+      <Filter>WII</Filter>
+    </ClCompile>
+    <ClCompile Include="Wiimote.cpp">
+      <Filter>WII</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HID.h">
+      <Filter>HID</Filter>
+    </ClInclude>
+    <ClInclude Include="HIDWII.h">
+      <Filter>HID</Filter>
+    </ClInclude>
+    <ClInclude Include="HIDXBOX.h">
+      <Filter>HID</Filter>
+    </ClInclude>
+    <ClInclude Include="UsbHID.h">
+      <Filter>WII</Filter>
+    </ClInclude>
+    <ClInclude Include="Wiimote.h">
+      <Filter>WII</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CLInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </CLInclude>
+    <ResourceCompile Include="RumbleController.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
