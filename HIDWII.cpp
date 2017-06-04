@@ -26,8 +26,6 @@ bool HIDWII::LeeMando(){
 	lastState = currentState;
 	wiimote->read();
 
-	Sleep(100);
-
 	//Botones
 	currentState.buttonA = wiimote->IsAPressed();
 	currentState.buttonB = wiimote->IsBPressed();
@@ -50,7 +48,7 @@ bool HIDWII::LeeMando(){
 	currentState.YMotion = wiimote->getYMotion() - 0x80;
 	currentState.ZMotion = wiimote->getZMotion() - 0x80;
 
-	
+	Sleep(10);
 	return true;
 }
 
@@ -91,12 +89,36 @@ void HIDWII::Mando2HID(){
 	lastButtonR3 = lastState.buttonHome && !currentState.buttonHome;
 
 	//AQUI DEBEMOS TRANSFORMAR LOS MOTION EN THUMBLX Y THUMBLY
-	thumbLX = currentState.ZMotion;
-	thumbLY = currentState.XMotion;
+	thumbLX = currentState.XMotion;
+	thumbLY = -currentState.YMotion;
+
+	DeadZone();
 	
 }
 void HIDWII::EscribeMando(){
 	//NO HAY VIBRACION
 }
 
+void HIDWII::DeadZone()
+{
+	// Zero value if thumbsticks are within the dead zone 
+	if ((thumbLX < 10 &&
+		thumbLX > -10) &&
+		(thumbLY < 10 &&
+		thumbLY > -10))
+	{
+		thumbLX = 0;
+		thumbLY = 0;
+	}
+
+	if ((thumbRX < 10 &&
+		thumbRX > -10) &&
+		(thumbRY < 10 &&
+		thumbRY > -10))
+	{
+		thumbRX = 0;
+		thumbRY = 0;
+	}
+
+}
 

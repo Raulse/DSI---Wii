@@ -145,7 +145,7 @@ int UsbHID::read()
 
 	nRead = 0;
 	clearInputByteBuffer();
-	Sleep(10);
+	//Sleep(10);
 	if (!ReadFile(mDevHandle, mInputBuf, mDevCaps.InputReportByteLength, &nRead, &mOverLapped)) {
 		GetLastError();
 		return 0;

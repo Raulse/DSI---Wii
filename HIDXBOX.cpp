@@ -87,10 +87,10 @@ void HIDXBOX::Mando2HID(){
 
 	//Joysticks
 	//Joysticks
-	thumbLX = XBox.state.Gamepad.sThumbLX;
-	thumbLY = XBox.state.Gamepad.sThumbLY;
-	thumbRX = XBox.state.Gamepad.sThumbRX;
-	thumbRY = XBox.state.Gamepad.sThumbRY;
+	thumbLX = XBox.state.Gamepad.sThumbLX / 3276.7;
+	thumbLY = XBox.state.Gamepad.sThumbLY / 3276.7;
+	thumbRX = XBox.state.Gamepad.sThumbRX / 3276.7;
+	thumbRY = XBox.state.Gamepad.sThumbRY / 3276.7;
 
 	if (DeadZoneOn)
 		DeadZoneJoystick();

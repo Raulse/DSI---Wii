@@ -24,9 +24,6 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
 VOID CALLBACK TimerCallBack();
 void generaEventos(HID * Control);
 
-
-
-
 void InputBloqueoVibracion(HID * Control);
 void InputBotones(HID * Control, POINT pt);
 void InputJoystick(HID * Control, POINT& pt);
@@ -36,11 +33,9 @@ void InputJoystick(HID * Control, POINT& pt);
 //-----------------------------------------------------------------------------
 #define SAFE_DELETE(p)  { if(p) { delete (p);     (p)=NULL; } }
 #define SAFE_RELEASE(p) { if(p) { (p)->Release(); (p)=NULL; } }
-
 //-----------------------------------------------------------------------------
 // Struct to hold xinput state
 //-----------------------------------------------------------------------------
-
 
 //WCHAR g_szMessage[4][1024] = {0};
 HWND g_hWnd;
@@ -75,7 +70,7 @@ int APIENTRY wWinMain( HINSTANCE hInst, HINSTANCE, LPWSTR, int )
 		break;
 	}
 
-	SetTimer(g_hWnd, 0, 1,(TIMERPROC) TimerCallBack);
+	SetTimer(g_hWnd, 0, 10,(TIMERPROC) TimerCallBack);
 
 	// Run the message loop.
 	//Coge eventos del usuario y del SO
@@ -106,17 +101,15 @@ void generaEventos(HID * Control)
 	POINT pt; // cursor location
 	GetCursorPos(&pt);
 
-	HWND hWnd = GetActiveWindow();
-
-	//InputBloqueoVibracion(Control);
+	InputBloqueoVibracion(Control);
 
 	InputBotones(Control,pt);
 
-	ScreenToClient(g_hWnd, &pt);
+	//ScreenToClient(g_hWnd, &pt);
 
 	InputJoystick(Control,pt);
 
-	ClientToScreen(g_hWnd, &pt);
+	//ClientToScreen(g_hWnd, &pt);
 	SetCursorPos(pt.x, pt.y);
 }
 
@@ -143,14 +136,16 @@ void InputBotones(HID * Control, POINT pt){
 		mouse_event(MOUSEEVENTF_LEFTUP, pt.x, pt.y, 0, NULL);
 
 	//Click derecho
+
 	if (Control->buttonB)
 		mouse_event(MOUSEEVENTF_RIGHTDOWN, pt.x, pt.y, 0, NULL);
-	else if (Control->buttonB)
+	else if (Control->lastButtonB)
 		mouse_event(MOUSEEVENTF_RIGHTUP, pt.x, pt.y, 0, NULL);
 
 	//AV PAG
 	if (Control->buttonY)
 		keybd_event(VK_PRIOR, 0x21, KEYEVENTF_EXTENDEDKEY | 0, 0);
+
 	else if (Control->lastButtonY){};
 
 	//RE PAG
@@ -202,7 +197,6 @@ void InputBotones(HID * Control, POINT pt){
 		mouse_event(MOUSEEVENTF_WHEEL, pt.x, pt.y, Control->rightTrigger / 3, NULL);
 
 	if (Control->buttonR3)
-		
 		PostQuitMessage(0);
 
 }
@@ -210,12 +204,11 @@ void InputBotones(HID * Control, POINT pt){
 void InputJoystick(HID * Control, POINT& pt)
 {
 	if (Control->thumbLY != 0)
-		pt.y -= Control->thumbLY / 3276.7;
+		pt.y -= Control->thumbLY; /// 3276.7;
 	if (Control->thumbLX != 0)
-		pt.x += Control->thumbLX / 3276.7;
+		pt.x += Control->thumbLX; /// 3276.7;
 
 }
-
 
 
 //-----------------------------------------------------------------------------
@@ -239,7 +232,7 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
                 // App is now inactive, so disable XInput to prevent
                 // user input from effecting application and to 
                 // disable rumble. 
-				//hWnd = GetActiveWindow();//ESTO NO SE DONDE VA
+				hWnd = GetActiveWindow();//ESTO NO SE DONDE VA
 
 				//XInputEnable( false );
             }

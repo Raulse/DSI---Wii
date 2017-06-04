@@ -3,7 +3,7 @@
 #include <XInput.h>
 
 //Para que solo detecte el joystick si se mueve un bastante
-#define INPUT_DEADZONE  ( 0.24f * FLOAT(0x7FFF) )  // Default to 24% of the +/- 32767 range.   This is a reasonable default value but can be altered if needed.
+#define INPUT_DEADZONE  ( 0.24f * FLOAT(0x7FFF) / 3276.7 )  // Default to 24% of the +/- 32767 range.   This is a reasonable default value but can be altered if needed.
 
 struct CONTROLER_STATE
 {

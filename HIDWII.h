@@ -28,7 +28,7 @@ private:
 	virtual bool LeeMando();
 	virtual void EscribeMando();
 	virtual void Mando2HID();
-
+	void DeadZone();
 	CyberGarage::Wiimote *wiimote;
 
 	WiiState lastState;
